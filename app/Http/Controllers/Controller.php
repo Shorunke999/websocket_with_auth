@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
+use App\Events\pushing_event;
 
 class Controller extends BaseController
 {
@@ -18,7 +20,8 @@ class Controller extends BaseController
         return view('display',['useR'=> $useR]);
     }
     public function process_data(Request $req){
-        broadcast(new pushing_event($user));
+        $message = $req->message;
+        broadcast(new pushing_event($message));
         return null;
     }
     /*public function get_message(Request $req){

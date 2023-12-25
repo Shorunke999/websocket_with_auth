@@ -32,13 +32,14 @@ class pushing_event implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('pushing_channel'),
+            new PresenceChannel('pushing_channel'),
         ];
     }
     public function broadcastWith(): array
     {
         return [
             'message'=> $this->message,
+            'user' => $this -> user ,
         ];
     }
 }
